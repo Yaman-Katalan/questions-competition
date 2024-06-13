@@ -15,15 +15,10 @@ class handler(BaseHTTPRequestHandler):
         query_string_list = parse.parse_qsl(url_component.query)
         my_dict = dict(query_string_list)
 
-        extra_info = ""
-        url = "https://opentdb.com/api.php"
 
-        # if "amount" in my_dict and "category" in my_dict:
-        #     url = f"https://opentdb.com/api.php?amount={my_dict["amount"]}&category={my_dict["category"]}"
-        # elif "amount" in my_dict:
-        #     url = f"https://opentdb.com/api.php?amount={my_dict["amount"]}"
-        # elif "category" in my_dict:
-        #     url = f"https://opentdb.com/api.php?amount=10&category={my_dict["category"]}"
+        extra_info = ""
+        url = "https://opentdb.com/api.php?amount=0"
+
 
         if "amount" in my_dict and "category" in my_dict:
             url = f"https://opentdb.com/api.php?amount={my_dict['amount']}&category={my_dict['category']}"
@@ -33,15 +28,16 @@ class handler(BaseHTTPRequestHandler):
             url = f"https://opentdb.com/api.php?amount=10&category={my_dict['category']}"
 
 
-
         my_request = requests.get(url)
         request_data = my_request.json()
         request_data = request_data["results"]
+
 
         self.send_response(200)
         self.send_header('Content-type', 'text/html') #text/plain
         self.end_headers()
         
+
         if len(request_data) > 49:
             extra_info = f"Maximum number of results this API can give is: {len(request_data)}"
             self.wfile.write(f"<p>{extra_info}</p><hr/>".encode())
