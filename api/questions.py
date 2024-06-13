@@ -18,12 +18,20 @@ class handler(BaseHTTPRequestHandler):
         extra_info = ""
         url = "https://opentdb.com/api.php"
 
+        # if "amount" in my_dict and "category" in my_dict:
+        #     url = f"https://opentdb.com/api.php?amount={my_dict["amount"]}&category={my_dict["category"]}"
+        # elif "amount" in my_dict:
+        #     url = f"https://opentdb.com/api.php?amount={my_dict["amount"]}"
+        # elif "category" in my_dict:
+        #     url = f"https://opentdb.com/api.php?amount=10&category={my_dict["category"]}"
+
         if "amount" in my_dict and "category" in my_dict:
-            url = f"https://opentdb.com/api.php?amount={my_dict["amount"]}&category={my_dict["category"]}"
+            url = f"https://opentdb.com/api.php?amount={my_dict['amount']}&category={my_dict['category']}"
         elif "amount" in my_dict:
-            url = f"https://opentdb.com/api.php?amount={my_dict["amount"]}"
+            url = f"https://opentdb.com/api.php?amount={my_dict['amount']}"
         elif "category" in my_dict:
-            url = f"https://opentdb.com/api.php?amount=10&category={my_dict["category"]}"
+            url = f"https://opentdb.com/api.php?amount=10&category={my_dict['category']}"
+
 
 
         my_request = requests.get(url)
